@@ -44,7 +44,7 @@ public class ItemThrower : MonoBehaviour
 
 
     //make this on mouse down after dev onmouse enter == easier to test with 
-    private void OnMouseEnter()
+    private void OnMouseDown()
     {
         if (!gm.isPaused)
         {
