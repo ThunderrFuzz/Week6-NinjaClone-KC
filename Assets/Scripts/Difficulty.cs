@@ -18,11 +18,7 @@ public class Difficulty : MonoBehaviour
         source3 = FindObjectOfType<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     public void easyDiff()
     {
         source3.PlayOneShot(clip);

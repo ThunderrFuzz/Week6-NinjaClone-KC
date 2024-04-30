@@ -146,16 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ba6943d96549647ac5036362d2f256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesUI: {fileID: 0}
-  gameOver_tmp: {fileID: 0}
-  scoreText: {fileID: 0}
-  paused: {fileID: 0}
-  volSlider: {fileID: 0}
-  restartGameButton: {fileID: 0}
-  titleScreen: {fileID: 0}
-  menuClip: {fileID: 0}
-  SpawnedItems: []
-  spawnDelay: 0
   pointValue: 15
   explosionPrefabs:
   - {fileID: 8088288519815545661, guid: 510cddf7b2bc73c439291fb158a50d44, type: 3}

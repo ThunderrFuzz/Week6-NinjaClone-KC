@@ -9,30 +9,37 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("UI")]
+    [Header("UI Text")]
     public TMP_Text livesUI;
     public TMP_Text gameOver_tmp;
     public TMP_Text scoreText;
     public TMP_Text paused;
+    public TMP_Text comboTotal;
+    public TMP_Text comboMulti;
+    [Header("UI Objects")]
     public Slider volSlider;
     public GameObject restartGameButton;
     public GameObject titleScreen;
     public AudioClip menuClip;
+
     [Header("Spawning")]
     public List<GameObject> SpawnedItems = new List<GameObject>();
-    
     bool canSpawn;
     bool gameOver;
-    protected static bool isPaused = false;
+    [Header("Game Info")]
+    
+    public bool isPaused = false;
     public float spawnDelay;
     public int lives = 5;
     protected static int score;
     public static AudioSource source;
+    Combo ComboManager;
 
     // Start is called before the first frame update
     void Start()
     {
         source = FindObjectOfType<AudioSource>();
+        ComboManager = FindObjectOfType<Combo>();
     }
 
 
@@ -54,13 +61,17 @@ public class GameManager : MonoBehaviour
         {
             
             updateScore();
-            changeVolume();
+            
             if (lives <= 0)
             {
                 lives = 0;
+                ComboManager.ResetComboMultiplier();
+                ComboManager.ResetCombo();
                 gameOver = true;
             }
             livesUI.text = "Lives remaining: " + lives;
+            comboTotal.text = "Combo: " + ComboManager.combo;
+            comboMulti.text = ComboManager.comboMultiplier+ "X Points";
             if (gameOver)
             {
                 stopGame();
@@ -80,6 +91,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         // Display pause menu or pause screen here
         paused.text = "Paused";
+       
     }
 
     void ResumeGame()
@@ -88,6 +100,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         // Hide pause menu or pause screen here
         paused.text = "Playing";
+        
     }
 
     void stopGame()
@@ -122,7 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void addPoints(int toadd)
     {
-        score += toadd;
+        score += toadd * ComboManager.combo;
         
     }
     void updateScore()
